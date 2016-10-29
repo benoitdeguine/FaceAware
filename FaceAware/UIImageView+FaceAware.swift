@@ -42,12 +42,11 @@ public extension UIImageView {
             let detector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyLow])
             let features = detector!.features(in: cImage)
             
+            print("found \(features.count) faces")
             if features.count == 1 {
-                print("found \(features.count) faces")
                 let imgSize = CGSize(width: Double(image.cgImage!.width), height: (Double(image.cgImage!.height)))
                 self.applyFaceDetection(for: features, size: imgSize, cgImage: image.cgImage!)
             } else {
-                print("No faces found")
                 DispatchQueue.main.async {
                     self.imageLayer().removeFromSuperlayer()
                 }
